@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParse: true }, () => {
-  console.log("Connected to MongoDB");
+const string_Url = process.env.MONGO_URL;
+mongoose.connect(string_Url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 app.listen(8800, () => {
