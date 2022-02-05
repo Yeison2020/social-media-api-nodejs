@@ -4,11 +4,24 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const string_Url = process.env.MONGO_URL;
-mongoose.connect(string_Url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
+// This way I fixed the error of requesting for string variable
+const newLocal = `"${process.env.MONGO_URL}"`;
+mongoose.connect(
+  newLocal,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to MongoDB");
+  }
+);
+
+// middleware
+
+app.use(express());
+app.use(helmet());
+app.use(morgan("common"));
+
+app.get("/", (req, res) => {
+  res.send("Welcome home page here ");
 });
 
 app.listen(8800, () => {
