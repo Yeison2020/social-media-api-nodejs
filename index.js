@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const userRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
 // This way I fixed the error of requesting for string variable
 const newLocal = `"${process.env.MONGO_URL}"`;
 mongoose.connect(
@@ -24,6 +25,7 @@ app.use(morgan("common"));
 // Always check each of the letters here
 
 app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 // Home page here The right way to
 app.get("/", (req, res) => {
