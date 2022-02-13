@@ -3,6 +3,8 @@ const User = require("./models/User/User");
 
 // Register here Please
 
+// Found bug here connecting to DB Mongo
+
 router.post("/register", async (req, res) => {
   const user = await new User({
     username: "enmanuel",
